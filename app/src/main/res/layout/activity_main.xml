@@ -63,8 +63,7 @@
             android:id="@+id/privateName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="TextView" />
+            android:layout_weight="2" />
 
         <Space
             android:layout_width="match_parent"
@@ -75,8 +74,7 @@
             android:id="@+id/familyName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="TextView" />
+            android:layout_weight="2" />
 
         <Space
             android:layout_width="match_parent"
@@ -87,8 +85,7 @@
             android:id="@+id/dateOfBirth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="dateOfBirth" />
+            android:layout_weight="2" />
 
         <Space
             android:layout_width="match_parent"
@@ -99,8 +96,7 @@
             android:id="@+id/phoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="TextView" />
+            android:layout_weight="2" />
 
         <Space
             android:layout_width="match_parent"

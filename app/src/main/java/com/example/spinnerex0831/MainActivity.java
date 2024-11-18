@@ -1,6 +1,8 @@
 package com.example.spinnerex0831;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -16,11 +18,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,AdapterView.OnItemSelectedListener
 {
     ListView studentList;
+    int clickPosition = 0;
     Spinner classList;
     TextView name,familyName,dateOfBirth,phoneNumber;
+    ArrayAdapter<String> showingList;
+    String classesList[] = {"Class1", "Class2", "Class3", "Class4"};
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     String class1Names[] = {"Moshe Vitus","Many Maata","Aby ron","Cleo Akash","Peter Guwisti","Jhon Konor","Jacob malor","Gari tang","Tery Levon","Morgan thucy"};
     String class1BirthDates[] = {"14.05.2008", "23.11.2008", "09.07.2008", "17.03.2008", "01.12.2008", "26.08.2008", "30.04.2008", "11.10.2008", "05.06.2008", "18.09.2008"};
@@ -52,17 +57,97 @@ public class MainActivity extends AppCompatActivity
             return insets;
         });
 
-        name.findViewById(R.id.privateName);
-        familyName.findViewById(R.id.familyName);
-        dateOfBirth.findViewById(R.id.dateOfBirth);
-        phoneNumber.findViewById(R.id.phoneNumber);
+        name = findViewById(R.id.privateName);
+        familyName = findViewById(R.id.familyName);
+        dateOfBirth = findViewById(R.id.dateOfBirth);
+        phoneNumber = findViewById(R.id.phoneNumber);
+        //----------------------------------------------------------------
+        studentList = findViewById(R.id.studentList);
+        classList = findViewById(R.id.classes);
+        //----------------------------------------------------------------
+        studentList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        studentList.setOnItemClickListener(this);
 
-        studentList.findViewById(R.id.studentList);
-        classList.findViewById(R.id.classes);
+        showingList = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, class1Names);
+        studentList.setAdapter(showingList);
+        //----------------------------------------------------------------
+        classList.setOnItemSelectedListener(this);
+        ArrayAdapter<String> showingClasses = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,classesList);
+        classList.setAdapter(showingClasses);
 
-        ArrayAdapter<String> showingList = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,class1Names);
-        classList.setAdapter(showingList);
 
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+        int space;
+        switch (clickPosition)
+        {
+            case 0:
+                space = class1Names[position].indexOf(" ");
+                name.setText("name: "+class1Names[position].substring(0, space));
+                familyName.setText("family name: "+class1Names[position].substring(space));
+                dateOfBirth.setText("Birth date: "+class1BirthDates[position]);
+                phoneNumber.setText("Phone number: "+class1PhoneNumbers[position]);
+                break;
+            case 1:
+                space = class2Names[position].indexOf(" ");
+                name.setText("name: "+class2Names[position].substring(0, space));
+                familyName.setText("family name: "+class2Names[position].substring(space));
+                dateOfBirth.setText("Birth date: "+class2BirthDates[position]);
+                phoneNumber.setText("Phone number: "+class2PhoneNumbers[position]);
+                break;
+            case 2:
+                space = class3Names[position].indexOf(" ");
+                name.setText("name: "+class3Names[position].substring(0, space));
+                familyName.setText("family name: "+class3Names[position].substring(space));
+                dateOfBirth.setText("Birth date: "+class3BirthDays[position]);
+                phoneNumber.setText("Phone number: "+class3PhoneNumbers[position]);
+                break;
+            case 3:
+                space = class4Names[position].indexOf(" ");
+                name.setText("name: "+class4Names[position].substring(0, space));
+                familyName.setText("family name: "+class4Names[position].substring(space));
+                dateOfBirth.setText("Birth date: "+class4BirthDays[position]);
+                phoneNumber.setText("Phone number: "+class4PhoneNumbers[position]);
+                break;
+        }
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    {
+        clickPosition = position;
+        switch(position)
+        {
+            case 0:
+                showingList = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,class1Names);
+                studentList.setAdapter(showingList);
+                break;
+            case 1:
+                showingList = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,class2Names);
+                studentList.setAdapter(showingList);
+                break;
+            case 2:
+                showingList = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,class3Names);
+                studentList.setAdapter(showingList);
+                break;
+            case 3:
+                showingList = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,class4Names);
+                studentList.setAdapter(showingList);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent)
+    {
+        showingList = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,class1Names);
+        studentList.setAdapter(showingList);
     }
 }
